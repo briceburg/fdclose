@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+'''
+timer.py - prints the elapsed time to /tmp/timer.log approximatley every minute
+'''
+
+import logging
+import os
+import sys
+import time
+
+
+def main():
+    start = time.time()
+
+    # setup logging to file and stderr
+    logging.basicConfig(level=logging.DEBUG,
+                        format='%(message)s',
+                        filename='/tmp/timer.log')
+    logging.getLogger('').addHandler(logging.StreamHandler(sys.stderr))
+
+    logging.info("timer started at %s with PID %d" %
+                 (time.strftime("%I:%M:%S %p"), os.getpid()))
+
+    while True:
+        time.sleep(60 - time.time() % 60)
+        elapsed = time.time() - start
+        logging.info("%d seconds have elapsed" % elapsed)
+
+
+if __name__ == '__main__':
+    main()
