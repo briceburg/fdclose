@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 '''
-timer.py - prints the elapsed time to /tmp/timer.log approximatley every minute
+test-timer - prints elapsed time to /tmp/test-timer.log approx. every minute
 '''
 
 import logging
@@ -15,10 +15,10 @@ def main():
     # setup logging to file and stderr
     logging.basicConfig(level=logging.DEBUG,
                         format='%(message)s',
-                        filename='/tmp/timer.log')
+                        filename='/tmp/test-timer.log')
     logging.getLogger('').addHandler(logging.StreamHandler(sys.stderr))
 
-    logging.info("timer started at %s with PID %d" %
+    logging.info("test-timer started at %s with PID %d" %
                  (time.strftime("%I:%M:%S %p"), os.getpid()))
 
     while True:
